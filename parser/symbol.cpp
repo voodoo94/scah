@@ -35,10 +35,13 @@ int addSymbol(string name, int line_number, int dep_stat, int exists)
 
 			symbol_table.push_back(symbol);
 		} else {
+			string module_name;
+
 			for (int index = 0; index < symbol_table.size(); index++) {
-				if ((symbol_table.at(index).module_name.compare(name)) == 0) {
+				module_name = symbol_table.at(index).module_name;
+				if ((module_name.compare(name)) == 0) {
 					symbol_table.at(index).line_numbers.push_back(line_number);
-					symbol_table.at(index).line_numbers.push_back(dep_stat);
+					symbol_table.at(index).dep_type.push_back(dep_stat);
 
 					break;
 				}
@@ -76,10 +79,18 @@ void printSymbolTable(vector<symtab> symbol_table)
 {
 	for (int index = 0; index < symbol_table.size(); index++) {
 		// Check if the column is empty. Print only when it has content.
-		for (int i = 0; i < symbol_table.at(index).line_numbers.size(); i++) {
-			cout <<symbol_table.at(index).module_name <<" : : ";
-			cout <<symbol_table.at(index).line_numbers.at(i) <<" : : ";
-			cout <<symbol_table.at(index).dep_type.at(i) <<endl;
+		symtab symbol;
+
+		symbol = symbol_table.at(index);
+		cout <<symbol.module_name <<" -- ";
+		for (int i = 0; i < symbol.line_numbers.size(); i++) {		
+			cout <<symbol.line_numbers.at(i) <<" ";
 		}
+		cout <<" : : ";
+
+		for (int i = 0; i < symbol.dep_type.size(); i++) {		
+			cout <<symbol.dep_type.at(i) <<" ";
+		}
+		cout <<endl;
 	}
 }

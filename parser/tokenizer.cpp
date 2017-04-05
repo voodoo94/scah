@@ -50,7 +50,10 @@ vector<symtab> tokenize(vector<string> &formatted_lines)
             			name_count++;
                         dependent = 1;
                         exists = 1;
-            		} 
+            		} else {
+                        addSymbol(name, line_count, dependent, exists);
+                    }
+
             		name.clear();
             	} else if (line.at(index_string) == ',') {
             		op = line.at(index_string);
@@ -58,8 +61,12 @@ vector<symtab> tokenize(vector<string> &formatted_lines)
                     if ((lookup_status = lookupSymbol(name)) == 0) {
             			addSymbol(name, line_count, dependent, exists);
             			name_count++;
+                        dependent = 1;
                         exists =1;
-            		}
+            		} else {
+                        addSymbol(name, line_count, dependent, exists);
+                    }
+
             		name.clear();
             	} else if (line.at(index_string) == '.') {
             		term = line.at(index_string);
@@ -67,8 +74,12 @@ vector<symtab> tokenize(vector<string> &formatted_lines)
                     if ((lookup_status = lookupSymbol(name)) == 0) {
             			addSymbol(name, line_count, dependent, exists);
             			name_count++;
+                        dependent = 1;
                         exists = 1;
-            		}
+            		} else {
+                        addSymbol(name, line_count, dependent, exists);
+                    }
+
             		name.clear();
             	}
             }            
@@ -80,8 +91,6 @@ vector<symtab> tokenize(vector<string> &formatted_lines)
     }
 
     sym = getSymbolTable();
-
-    printSymbolTable(sym);
 
     return sym;
 }
