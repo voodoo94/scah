@@ -17,6 +17,7 @@ vector<symtab> tokenize(vector<string> &formatted_lines)
     string op;
     string term;
     string dependency;
+    string first_module;
 
     int status;
     int index;
@@ -50,6 +51,7 @@ vector<symtab> tokenize(vector<string> &formatted_lines)
             			name_count++;
                         dependent = 1;
                         exists = 1;
+                        first_module = name;
             		} else {
                         addSymbol(name, line_count, dependent, exists);
                     }

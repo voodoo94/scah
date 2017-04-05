@@ -42,7 +42,6 @@ int addSymbol(string name, int line_number, int dep_stat, int exists)
 				if ((module_name.compare(name)) == 0) {
 					symbol_table.at(index).line_numbers.push_back(line_number);
 					symbol_table.at(index).dep_type.push_back(dep_stat);
-
 					break;
 				}
 			}
@@ -91,6 +90,9 @@ void printSymbolTable(vector<symtab> symbol_table)
 		for (int i = 0; i < symbol.dep_type.size(); i++) {		
 			cout <<symbol.dep_type.at(i) <<" ";
 		}
+
 		cout <<endl;
 	}
+
+	cout <<endl;
 }
